@@ -1,5 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
+
+import './index.css';
+import Vector_logo from './images/Vector_logo.svg';
+import image from './images/image.jpg';
 
 function App() {
   return (
@@ -8,14 +10,16 @@ function App() {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Mesto</title>
       <div>
+        <div className="page">
         <header className="header">
-          <img src="<%=require('./images/Vector_logo.svg')%>" alt="Изображение логотипа в шапке" className="header__logo" />
+          <img src={Vector_logo} alt="Изображение логотипа в шапке" className="header__logo" />
         </header>
+
         <main className="content">
           <section className="profile">
             <div className="profile__card">
               <div className="avatar">
-                <button type="button" className="profile__avatar-button"><img src="<%=require('./images/image.jpg')%>" alt="Изображение логотипа в шапке" className="profile__avatar" /></button>
+                <button type="button" className="profile__avatar-button"><img src={image} alt="Изображение логотипа в шапке" className="profile__avatar" /></button>
               </div>
               <div className="profile__edit-info">
                 <div className="profile__info">
@@ -34,6 +38,7 @@ function App() {
           <p className="footer__author">©2020 Mesto Russia</p>
         </footer>
       </div>
+        </div>
       <div className="popup popup_type_avatar">
         <div className="popup__container">
           <button type="button" className="popup__close" />
