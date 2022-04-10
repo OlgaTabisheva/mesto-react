@@ -125,7 +125,9 @@ function App() {
           <h2 className="popup__place-name"/>
         </div>
       </div>
-      <template className="card-template"/>
+
+
+
     </div>
 
   );
