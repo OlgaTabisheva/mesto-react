@@ -5,7 +5,7 @@ import React from 'react';
 function Header() {
   return (
     <header className="header">
-      <img src={Vector_logo} alt="Изображение логотипа в шапке" className="header__logo" />
+      <img src={Vector_logo} alt="Изображение логотипа в шапке" className="header__logo"/>
     </header>
   );
 }

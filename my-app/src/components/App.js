@@ -1,12 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
 import '../index.css';
-import image from '../images/image.jpg';
 import Header from './Header';
 import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
-import Card from "./Card";
 import ImagePopup from "./ImagePopup";
 
 function App() {
@@ -35,14 +32,15 @@ function App() {
     }
   }
 
-    function handleCardClick(card){
-      {
+  function handleCardClick(card) {
+    {
 
       selectedCard(card)
     }
 
 
   }
+
   function closeAllPopups() {
     {
       AvatarPopupOpen(false)
@@ -64,7 +62,7 @@ function App() {
           <Main onEditAvatar={handleEditAvatarClick}
                 onEditProfile={handleEditProfileClick}
                 onAddPlace={handleAddPlaceClick}
-                onCardClick ={handleCardClick}
+                onCardClick={handleCardClick}
 
           />
           <Footer/>
@@ -142,43 +140,11 @@ function App() {
       </div>
 
 
-
     </div>
 
   );
 }
+
 export default App;
 
 
-/*
-<div className="popup popup_type_avatar">
-  <div className="popup__container">
-    <button type="button" className="popup__close"/>
-    <form name="profileInputForm" className="popup__form" noValidate>
-      <h2 className="popup__title">Обновить аватар</h2>
-      <input id="avatar" name="input-link" type="url" className="popup__input popup__input_card-link"
-             placeholder="Ссылка на картинку" required/>
-      <span id="error-avatar" className="error-message error-message_visible"/>
-      <button className="popup__button-save" type="submit">Сохранить</button>
-    </form>
-  </div>
-</div>*/
-/*
-function  handleEditProfileClick(){
-  {
-    console.log('ghb')
-    const pop = document.querySelector('.popup_type_edit')
-    pop.classList.add('popup_opened');
-  }
-
-}}
-{function  handleAddPlaceClick(){
-          {
-            console.log('ghb')
-            const pop = document.querySelector('.popup_type_add-card')
-            pop.classList.add('popup_opened');
-          }
-
-        }}
-
-*/
