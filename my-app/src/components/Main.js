@@ -1,6 +1,9 @@
 import React from 'react';
 import image from "../images/image.jpg";
 import {api} from "../utils/Api";
+import Card from "./Card";
+
+
 function Main(props) {
 
 
@@ -8,7 +11,6 @@ function Main(props) {
   const [userDescription , setDescription] = React.useState('');
   const [userAvatar , setAvatar] = React.useState('')
   const [cards, setCards] = React.useState([])
-
   React.useEffect(() => {
    Promise.all([api.getProfile(),api.getInitialCards()])
      .then(([profile,cards])=>{
@@ -43,23 +45,9 @@ function Main(props) {
 
 
      {<section className="elements">
-        {cards.map((card, i) => (
+        {cards.map((element, i) => (
           // Важный атрибут: key
-          <div key={card._id}>
-            <article className="element">
-            <button className="element__delete-button"></button>
-            <button className="element__view-button">
-              <img src={card.link} className="element__image" alt="Карточка с изображением места"/>
-            </button>
-            <div className="element__group">
-              <h2 className="element__group-title">{card.name}</h2>
-              <div className="buttons">
-                <button type="button" className="element__group-heart"></button>
-                <span type="button" className="element__like-count"></span>
-              </div>
-            </div>
-            </article>
-          </div>
+    <Card card={element} onCardClick={props.onCardClick}></Card>
         ))}
       </section>}
     </main>
@@ -67,6 +55,7 @@ function Main(props) {
 
   );
 }
+
 export default Main;
 
 
