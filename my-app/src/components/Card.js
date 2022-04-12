@@ -7,7 +7,7 @@ function Card(props) {
   }
 
   return (
-    <div key={props.card._id}>
+    <div >
       <article className="element">
         <button className="element__delete-button"></button>
         <button className="element__view-button" onClick={handleClick}>

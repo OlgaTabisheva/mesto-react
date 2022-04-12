@@ -7,55 +7,41 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
-  const [isEditAvatarPopupOpen, AvatarPopupOpen] = React.useState(false);
-  const [isEditEditPopupOpen, EditPopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, AddPopupOpen] = React.useState(false);
-  const [isCardSelected, selectedCard] = React.useState({});
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditEditPopupOpen, setIsEditEditPopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [CardSelected, setsCardSelected] = React.useState({});
 
   function handleEditAvatarClick() {
-    {
-      AvatarPopupOpen(true)
-    }
+    setIsEditAvatarPopupOpen(true)
 
   }
 
   function handleEditProfileClick() {
-    {
-      EditPopupOpen(true)
-    }
+    setIsEditEditPopupOpen(true)
 
   }
 
   function handleAddPlaceClick() {
-    {
-      AddPopupOpen(true)
-    }
+    setIsAddPlacePopupOpen(true)
+
   }
 
   function handleCardClick(card) {
-    {
-
-      selectedCard(card)
-    }
-
+    setsCardSelected(card)
 
   }
 
   function closeAllPopups() {
-    {
-      AvatarPopupOpen(false)
-      EditPopupOpen(false)
-      AddPopupOpen(false)
-      selectedCard({})
-    }
+    setIsEditAvatarPopupOpen(false)
+    setIsEditEditPopupOpen(false)
+    setIsAddPlacePopupOpen(false)
+    setsCardSelected({})
 
   }
 
   return (
     <div>
-      <meta charSet="UTF-8"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>Mesto</title>
       <div>
         <div className="page">
           <Header/>
@@ -66,76 +52,43 @@ function App() {
 
           />
           <Footer/>
-        </div>
-      </div>
+          <PopupWithForm className="Avatar" name='avatar' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} buttonText="Coxранить">
 
+            <form name="profileInputForm" className="popup__form" noValidate>
+              <h2 className="popup__title">Обновить аватар</h2>
+              <input id="avatar" name="input-link" type="url" className="popup__input popup__input_card-link"
+                     placeholder="Ссылка на картинку" required/>
+              <span id="error-avatar" className="error-message error-message_visible"/>
 
-      <PopupWithForm className="Avatar" name='avatar' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
+            </form>
+          </PopupWithForm>
 
-        <form name="profileInputForm" className="popup__form" noValidate>
-          <h2 className="popup__title">Обновить аватар</h2>
-          <input id="avatar" name="input-link" type="url" className="popup__input popup__input_card-link"
-                 placeholder="Ссылка на картинку" required/>
-          <span id="error-avatar" className="error-message error-message_visible"/>
-          <button className="popup__button-save" type="submit">Сохранить</button>
-        </form>
-      </PopupWithForm>
+          <PopupWithForm className="Edit" name='edit' isOpen={isEditEditPopupOpen} onClose={closeAllPopups} buttonText="Coxранить">
+            <form id="form__input" name="profileInputForm" className="popup__form" noValidate>
+              <h2 className="popup__title">Редактировать профиль</h2>
+              <input placeholder="Введите имя пользователя" id="name" name="input-name" type="text"
+                     className="popup__input popup__input_type_name" minLength={2} maxLength={40} required/>
+              <span id="error-name" className="error-message error-message_visible"/>
+              <input placeholder="Введите профессию" id="job" name="input-job" type="text"
+                     className="popup__input popup__input_type_job" minLength={2} maxLength={200} required/>
+              <span id="error-job" className="error-message error-message_visible"/>
+            </form>
 
-      <PopupWithForm className="Edit" name='edit' isOpen={isEditEditPopupOpen} onClose={closeAllPopups}>
-        <form id="form__input" name="profileInputForm" className="popup__form" noValidate>
-          <h2 className="popup__title">Редактировать профиль</h2>
-          <input placeholder="Введите имя пользователя" id="name" name="input-name" type="text"
-                 className="popup__input popup__input_type_name" minLength={2} maxLength={40} required/>
-          <span id="error-name" className="error-message error-message_visible"/>
-          <input placeholder="Введите профессию" id="job" name="input-job" type="text"
-                 className="popup__input popup__input_type_job" minLength={2} maxLength={200} required/>
-          <span id="error-job" className="error-message error-message_visible"/>
-          <button className="popup__button-save" type="submit">Сохранить</button>
-        </form>
+          </PopupWithForm>
+          <PopupWithForm className="Add-card" name='add-card' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} buttonText="Coздать">
+            <form name="placeInputForm" className="popup__form" noValidate>
+              <h2 className="popup__title">Новое место</h2>
+              <input id="place" name="input-place" type="text" className="popup__input popup__input_type_card-name"
+                     minLength={2} maxLength={30} placeholder="Название" required/>
+              <span id="error-place" className="error-message error-message_visible"/>
+              <input id="link" name="input-link" type="url" className="popup__input popup__input_card-link"
+                     placeholder="Ссылка на картинку" required/>
+              <span id="error-link" className="error-message error-message_visible"/>
+            </form>
 
-      </PopupWithForm>
-      <PopupWithForm className="Add-card" name='add-card' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-        <form name="placeInputForm" className="popup__form" noValidate>
-          <h2 className="popup__title">Новое место</h2>
-          <input id="place" name="input-place" type="text" className="popup__input popup__input_type_card-name"
-                 minLength={2} maxLength={30} placeholder="Название" required/>
-          <span id="error-place" className="error-message error-message_visible"/>
-          <input id="link" name="input-link" type="url" className="popup__input popup__input_card-link"
-                 placeholder="Ссылка на картинку" required/>
-          <span id="error-link" className="error-message error-message_visible"/>
-          <button className="popup__button-save" type="submit">Создать</button>
-        </form>
+          </PopupWithForm>
+          <ImagePopup card={CardSelected} onClose={closeAllPopups}></ImagePopup>
 
-      </PopupWithForm>
-      <ImagePopup card={isCardSelected} onClose={closeAllPopups}></ImagePopup>
-
-      <div className="popup popup_type_edit">
-
-        <div className="popup__container">
-          <button type="button" className="popup__close"/>
-
-        </div>
-      </div>
-      <div className="popup popup_type_add-card">
-        <div className="popup__container">
-          <button type="button" className="popup__close"/>
-
-        </div>
-      </div>
-      <div className="popup popup_type_delete-card">
-        <div className="popup__container">
-          <button type="button" className="popup__close"/>
-          <form name="placeInputForm" className="popup__form" noValidate>
-            <h2 className="popup__title">Вы уверены?</h2>
-            <button className="popup__button-save" type="submit">ДА</button>
-          </form>
-        </div>
-      </div>
-      <div className="popup popup_type_image-container">
-        <div className="popup__container-image">
-          <button type="button" className="popup__close"/>
-          <img className="popup__image-link" alt="Изображение места"/>
-          <h2 className="popup__place-name"/>
         </div>
       </div>
 
