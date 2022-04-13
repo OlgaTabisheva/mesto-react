@@ -41,56 +41,55 @@ function App() {
   }
 
   return (
-    <div>
-      <div>
-        <div className="page">
-          <Header/>
-          <Main onEditAvatar={handleEditAvatarClick}
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
-                onCardClick={handleCardClick}
 
-          />
-          <Footer/>
-          <PopupWithForm className="Avatar" name='avatar' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} buttonText="Coxранить">
+    <div className="page">
+      <Header/>
+      <Main onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
 
-            <form name="profileInputForm" className="popup__form" noValidate>
-              <h2 className="popup__title">Обновить аватар</h2>
-              <input id="avatar" name="input-link" type="url" className="popup__input popup__input_card-link"
-                     placeholder="Ссылка на картинку" required/>
-              <span id="error-avatar" className="error-message error-message_visible"/>
+      />
+      <Footer/>
+      <PopupWithForm className="Avatar" name='avatar' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
+                     buttonText="Coxранить">
 
-            </form>
-          </PopupWithForm>
+        <form name="profileInputForm" className="popup__form" noValidate>
+          <h2 className="popup__title">Обновить аватар</h2>
+          <input id="avatar" name="input-link" type="url" className="popup__input popup__input_card-link"
+                 placeholder="Ссылка на картинку" required/>
+          <span id="error-avatar" className="error-message error-message_visible"/>
 
-          <PopupWithForm className="Edit" name='edit' isOpen={isEditEditPopupOpen} onClose={closeAllPopups} buttonText="Coxранить">
-            <form id="form__input" name="profileInputForm" className="popup__form" noValidate>
-              <h2 className="popup__title">Редактировать профиль</h2>
-              <input placeholder="Введите имя пользователя" id="name" name="input-name" type="text"
-                     className="popup__input popup__input_type_name" minLength={2} maxLength={40} required/>
-              <span id="error-name" className="error-message error-message_visible"/>
-              <input placeholder="Введите профессию" id="job" name="input-job" type="text"
-                     className="popup__input popup__input_type_job" minLength={2} maxLength={200} required/>
-              <span id="error-job" className="error-message error-message_visible"/>
-            </form>
+        </form>
+      </PopupWithForm>
 
-          </PopupWithForm>
-          <PopupWithForm className="Add-card" name='add-card' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} buttonText="Coздать">
-            <form name="placeInputForm" className="popup__form" noValidate>
-              <h2 className="popup__title">Новое место</h2>
-              <input id="place" name="input-place" type="text" className="popup__input popup__input_type_card-name"
-                     minLength={2} maxLength={30} placeholder="Название" required/>
-              <span id="error-place" className="error-message error-message_visible"/>
-              <input id="link" name="input-link" type="url" className="popup__input popup__input_card-link"
-                     placeholder="Ссылка на картинку" required/>
-              <span id="error-link" className="error-message error-message_visible"/>
-            </form>
+      <PopupWithForm className="Edit" name='edit' isOpen={isEditEditPopupOpen} onClose={closeAllPopups}
+                     buttonText="Coxранить">
+        <form id="form__input" name="profileInputForm" className="popup__form" noValidate>
+          <h2 className="popup__title">Редактировать профиль</h2>
+          <input placeholder="Введите имя пользователя" id="name" name="input-name" type="text"
+                 className="popup__input popup__input_type_name" minLength={2} maxLength={40} required/>
+          <span id="error-name" className="error-message error-message_visible"/>
+          <input placeholder="Введите профессию" id="job" name="input-job" type="text"
+                 className="popup__input popup__input_type_job" minLength={2} maxLength={200} required/>
+          <span id="error-job" className="error-message error-message_visible"/>
+        </form>
 
-          </PopupWithForm>
-          <ImagePopup card={CardSelected} onClose={closeAllPopups}></ImagePopup>
+      </PopupWithForm>
+      <PopupWithForm className="Add-card" name='add-card' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}
+                     buttonText="Coздать">
+        <form name="placeInputForm" className="popup__form" noValidate>
+          <h2 className="popup__title">Новое место</h2>
+          <input id="place" name="input-place" type="text" className="popup__input popup__input_type_card-name"
+                 minLength={2} maxLength={30} placeholder="Название" required/>
+          <span id="error-place" className="error-message error-message_visible"/>
+          <input id="link" name="input-link" type="url" className="popup__input popup__input_card-link"
+                 placeholder="Ссылка на картинку" required/>
+          <span id="error-link" className="error-message error-message_visible"/>
+        </form>
 
-        </div>
-      </div>
+      </PopupWithForm>
+      <ImagePopup card={CardSelected} onClose={closeAllPopups}></ImagePopup>
 
 
     </div>

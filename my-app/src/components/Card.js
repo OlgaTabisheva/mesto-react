@@ -7,7 +7,6 @@ function Card(props) {
   }
 
   return (
-    <div >
       <article className="element">
         <button className="element__delete-button"></button>
         <button className="element__view-button" onClick={handleClick}>
@@ -21,8 +20,6 @@ function Card(props) {
           </div>
         </div>
       </article>
-    </div>
-
   );
 }
 
