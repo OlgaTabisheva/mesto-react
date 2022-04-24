@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 function ImagePopup(props) {
   return (
     <div className={`popup popup_type_image-container ${props.card._id ? 'popup_opened' : ''}`}>

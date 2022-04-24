@@ -27,7 +27,6 @@ function App() {
       }).catch(console.log)
   }, [])
 
-
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -35,34 +34,30 @@ function App() {
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+    }).catch(console.log)
   }
 
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(() => {
-      setCards(cards.filter(deleteCard => deleteCard._id !== card._id))
-    })
-
+      setCards((prevState) => {
+      return prevState.filter(deleteCard => deleteCard._id !== card._id)})
+    }).catch(console.log)
   }
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true)
-
   }
 
   function handleEditProfileClick() {
     setIsEditEditPopupOpen(true)
-
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true)
-
   }
 
   function handleCardClick(card) {
     setsCardSelected(card)
-
   }
 
   function closeAllPopups() {
@@ -70,32 +65,28 @@ function App() {
     setIsEditEditPopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setsCardSelected({})
-
   }
 
   function handleUpdateUser(newInfo) {
     api.editProfile(newInfo.name, newInfo.about).then((newUserInfo) => {
       setСurrentUser(newUserInfo)
       closeAllPopups()
-    })
+    }).catch(console.log)
   }
 
   function handleUpdateAvatar(avatar) {
     api.editAvatar(avatar).then((newUserInfo) => {
       setСurrentUser(newUserInfo)
       closeAllPopups()
-    })
+    }).catch(console.log)
   }
 
   function handleAddPlaceSubmit(newInfo) {
     api.addCard(newInfo.name, newInfo.link).then((newCard) => {
-      const newCards = cards
-      newCards.push(newCard)
-      setCards(newCards)
+      setCards([newCard, ...cards]);
       closeAllPopups()
-    })
+    }).catch(console.log)
   }
-
 
   return (
     <currentUserContext.Provider value={currentUser}>
@@ -113,7 +104,6 @@ function App() {
         />
         <Footer/>
 
-
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateAvatar}/>
 
         <EditProfilePopup isOpen={isEditEditPopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
@@ -122,12 +112,10 @@ function App() {
 
         <ImagePopup card={CardSelected} onClose={closeAllPopups}></ImagePopup>
 
-
       </div>
 
     </currentUserContext.Provider>
   );
-
 }
 
 export default App;

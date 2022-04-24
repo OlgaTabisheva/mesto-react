@@ -1,9 +1,15 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-
 function AddPlacePopup(props) {
 
+  React.useEffect(()=>{
+    if (!props.isOpen)
+    {
+      setLink("");
+      setNameLink("");
+    }
+  }, [props.isOpen])
   const [name, setNameLink] = React.useState("");
   const [link, setLink] = React.useState("");
 
@@ -24,8 +30,7 @@ function AddPlacePopup(props) {
       name,
       link,
     });
-    setLink("");
-    setNameLink("");
+
   }
 
   return (
@@ -34,11 +39,11 @@ function AddPlacePopup(props) {
                    buttonText="Coздать">
       <form name="placeInputForm" className="popup__form" noValidate onSubmit={handleSubmit}>
         <h2 className="popup__title">Новое место</h2>
-        <input onChange={handleChangeNameLink} id="place" name="input-place" type="text"
+        <input onChange={handleChangeNameLink} value={name} id="place" name="input-place" type="text"
                className="popup__input popup__input_type_card-name"
                minLength={2} maxLength={30} placeholder="Название" required/>
         <span id="error-place" className="error-message error-message_visible"/>
-        <input onChange={handleChangeLink} id="link" name="input-link" type="url"
+        <input onChange={handleChangeLink} value={link} id="link" name="input-link" type="url"
                className="popup__input popup__input_card-link"
                placeholder="Ссылка на картинку" required/>
         <span id="error-link" className="error-message error-message_visible"/>

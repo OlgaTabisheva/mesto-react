@@ -1,7 +1,6 @@
 import Vector_logo from '../images/Vector_logo.svg';
 import React from 'react';
 
-
 function Header() {
   return (
     <header className="header">

@@ -2,15 +2,9 @@ import React from 'react';
 import Card from "./Card";
 import {currentUserContext} from "../context/CurrentUserContext";
 
-
 function Main(props) {
-
   const currentUser = React.useContext(currentUserContext)
-
-
   return (
-
-
     <main className="content">
       <section className="profile">
         <div className="profile__card">
@@ -32,8 +26,6 @@ function Main(props) {
         <button onClick={props.onAddPlace} aria-label="Кнопка добавления" type="button"
                 className="profile__add-button"/>
       </section>
-
-
       {<section className="elements">
         {props.cards.map((element) => (
           <Card card={element} onCardDelete={props.onCardDelete} onCardLike={props.onCardLike}
