@@ -5,12 +5,29 @@ import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import {currentUserContext} from "../context/CurrentUserContext";
+//import {cardsContext} from "../context/CardsContext";
+import {api} from "../utils/Api";
+import EditProfilePopup from "../components/EditProfilePopup"
+import EditAvatarPopup from "../components/EditAvatarPopup"
 
 function App() {
+
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditEditPopupOpen, setIsEditEditPopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [CardSelected, setsCardSelected] = React.useState({});
+  const [currentUser, setСurrentUser ] = React.useState({});
+
+  React.useEffect(() => {
+    Promise.all([api.getProfile()])
+      .then(([profile]) => {
+        setСurrentUser(profile);
+      }).catch(console.log)
+  }, [])
+
+
+
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true)
@@ -40,7 +57,22 @@ function App() {
 
   }
 
+  function  handleUpdateUser(newInfo){
+    api.editProfile(newInfo.name,newInfo.about).then((newUserInfo)=>{
+      setСurrentUser(newUserInfo)
+      closeAllPopups()
+    })
+  }
+
+  function handleUpdateAvatar(avatar){
+    api.editAvatar(avatar).then((newUserInfo)=>{
+      setСurrentUser(newUserInfo)
+      closeAllPopups()
+  })
+  }
+
   return (
+    <currentUserContext.Provider value={currentUser}>
 
     <div className="page">
       <Header/>
@@ -51,31 +83,10 @@ function App() {
 
       />
       <Footer/>
-      <PopupWithForm className="Avatar" name='avatar' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
-                     buttonText="Coxранить">
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateUser ={handleUpdateAvatar}/>
 
-        <form name="profileInputForm" className="popup__form" noValidate>
-          <h2 className="popup__title">Обновить аватар</h2>
-          <input id="avatar" name="input-link" type="url" className="popup__input popup__input_card-link"
-                 placeholder="Ссылка на картинку" required/>
-          <span id="error-avatar" className="error-message error-message_visible"/>
+      <EditProfilePopup isOpen={isEditEditPopupOpen} onClose={closeAllPopups} onUpdateUser ={handleUpdateUser}/>
 
-        </form>
-      </PopupWithForm>
-
-      <PopupWithForm className="Edit" name='edit' isOpen={isEditEditPopupOpen} onClose={closeAllPopups}
-                     buttonText="Coxранить">
-        <form id="form__input" name="profileInputForm" className="popup__form" noValidate>
-          <h2 className="popup__title">Редактировать профиль</h2>
-          <input placeholder="Введите имя пользователя" id="name" name="input-name" type="text"
-                 className="popup__input popup__input_type_name" minLength={2} maxLength={40} required/>
-          <span id="error-name" className="error-message error-message_visible"/>
-          <input placeholder="Введите профессию" id="job" name="input-job" type="text"
-                 className="popup__input popup__input_type_job" minLength={2} maxLength={200} required/>
-          <span id="error-job" className="error-message error-message_visible"/>
-        </form>
-
-      </PopupWithForm>
       <PopupWithForm className="Add-card" name='add-card' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}
                      buttonText="Coздать">
         <form name="placeInputForm" className="popup__form" noValidate>
@@ -94,7 +105,9 @@ function App() {
 
     </div>
 
+    </currentUserContext.Provider>
   );
+
 }
 
 export default App;

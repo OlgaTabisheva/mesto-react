@@ -74,6 +74,10 @@ class Api {
 
   }
 
+  changeLikeCardStatus(id, status){
+    return status ? this.addLike(id) : this.deleteLike(id)
+  }
+
   _getResponseData(res) {
     if (!res.ok) {
       return Promise.reject(`Ошибка: ${res.status}`);
