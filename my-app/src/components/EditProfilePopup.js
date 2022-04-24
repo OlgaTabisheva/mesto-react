@@ -5,8 +5,8 @@ import {currentUserContext} from "../context/CurrentUserContext";
 
 function EditProfilePopup(props) {
   const [name, setName] = React.useState("");
-  const [description, setDescription ] = React.useState("");
-  const currentUser =React.useContext(currentUserContext)
+  const [description, setDescription] = React.useState("");
+  const currentUser = React.useContext(currentUserContext)
 
   React.useEffect(() => {
     setName(currentUser.name);
@@ -19,6 +19,7 @@ function EditProfilePopup(props) {
 
     setName(e.target.value);
   }
+
   function handleChangeDescription(e) {
     setDescription(e.target.value);
   }
@@ -38,10 +39,12 @@ function EditProfilePopup(props) {
                    buttonText="Coxранить">
       <form id="form__input" name="profileInputForm" className="popup__form" noValidate onSubmit={handleSubmit}>
         <h2 className="popup__title">Редактировать профиль</h2>
-        <input onChange={handleChangeName} value={name}  placeholder="Введите имя пользователя" id="name" name="input-name" type="text"
+        <input onChange={handleChangeName} value={name} placeholder="Введите имя пользователя" id="name"
+               name="input-name" type="text"
                className="popup__input popup__input_type_name" minLength={2} maxLength={40} required/>
         <span id="error-name" className="error-message error-message_visible"/>
-        <input onChange={handleChangeDescription} value={description}  placeholder="Введите профессию" id="job" name="input-job" type="text"
+        <input onChange={handleChangeDescription} value={description} placeholder="Введите профессию" id="job"
+               name="input-job" type="text"
                className="popup__input popup__input_type_job" minLength={2} maxLength={200} required/>
         <span id="error-job" className="error-message error-message_visible"/>
       </form>
