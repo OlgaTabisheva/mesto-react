@@ -6,8 +6,8 @@ import Main from "./Main";
 import ImagePopup from "./ImagePopup";
 import {currentUserContext} from "../context/CurrentUserContext";
 import {api} from "../utils/Api";
-import EditProfilePopup from "../components/EditProfilePopup"
-import EditAvatarPopup from "../components/EditAvatarPopup"
+import EditProfilePopup from "./EditProfilePopup"
+import EditAvatarPopup from "./EditAvatarPopup"
 import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
